@@ -1,4 +1,32 @@
 <!-- Логотипчик, заголовок и опциональный регион -->
+<%
+    def yearLink(year)
+        if year == Time.now.year
+            return ''
+        else
+            return year.to_s
+        end
+    end
+    
+    def regionYearLink(region_id, year)
+        ret = ''
+        if region_id != ''
+            ret = '/' + region_id
+        end
+        
+        if year != nil and year != 0
+            yl = yearLink(year)
+            if yl != ''
+                ret = ret + '/' + yearLink(year)
+            end
+        end
+
+        ret = '/' if ret == ''
+
+        return ret
+    end
+%>
+
 <div class=logo>
     <a href="/">
         <img src="/assets/kogda-igra.png" height=32 width=32>
@@ -13,19 +41,73 @@
 <div class=menu_box>
     <% if @regions then %>
         <div class="menu_strip">
-            <% @regions.each do |key, name| %>
+            <% @regions.each do |key, value| %>
                 <% if key != @region_key then %>
                     <div class="active">
-                    <%= link_to name, '/' + key %>
+                    <%= link_to value[:name], regionYearLink(key, @year) %>
                 <% else %>
                     <div class="passive">
-                    <%= name %>
+                    <%= value[:name] %>
                 <% end %>
                 </div>
             <% end %>
         </div>
     <% end %>
+    <%
+        showYears = []
+        years = @years_cache[1]#@regions[@region_key][:id]]
+
+        minDiff = 1000000
+        minIndex = -1
+        years.each_with_index do |value, index|
+            diff = (@year - value).abs
+            if diff < minDiff then
+                minDiff = diff
+                minIndex = index
+            end
+        end
+
+        startIndex = minIndex - 3
+        finishIndex = minIndex + 3
+        showYears = []
+        while startIndex < 0
+            showYears.push(0)
+            startIndex = startIndex + 1
+        end
+
+        finishIndex = years.length - 1 if finishIndex > years.length - 1
+
+        showYears.concat(years[startIndex..finishIndex])
+
+        while finishIndex < minIndex + 3
+            showYears.push(0)
+            finishIndex = finishIndex + 1
+        end
+
+        # тут получаем массив ВСЕГДА из 7 элементов
+    %>
+    <div class="menu_strip">
+        <% showYears.each_with_index do |year, index| %>
+            <% if year > 0 %>
+                <% if year == @year %>
+                    <div class="passive">
+                    <%= year %>
+                <% else %>
+                    <div class="active">
+                    <% text = year %>
+                    <% text = "<<" if index == 0 %>
+                    <% text = ">>" if index == 6 %>
+
+                    <%= link_to text, regionYearLink(@region_key, year) %>
+                <% end %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
 </div>
+
+
+
 <br>
 Region: <%= @region_key %>, <%= @region_name %><br>
 Year: <%= @year %>
