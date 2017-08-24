@@ -27,7 +27,16 @@
             <a href="#dec">Декабрь</a>
         </td>
     </tr>
+    <% mon = 1 %>
     <% @games.each do |game| %>
+        <% if game["date_start"].month > mon %>
+            <tr>
+                <td colspan="8">
+                    Weee
+                </td>
+            </tr>
+            <% mon = game["date_start"].month %>
+        <% end %>
         <tr>
             <td class="<%= game["status_style"] %>" id="<%= game["id"] %>">
                 <%= game["status_name"] %>
@@ -65,6 +74,21 @@
             <!-- dates -->
             <td>
                 <%= dateRangeToText(game["date_start"], game["date_finish"]) %>
+            </td>
+            <td>
+                <%= raw(game["game_type_name"]) %>
+            </td>
+            <td>
+                <%= game["polygon_name"] %>
+            </td>
+            <td>
+                <%= game["players_count"] %>
+            </td>
+            <td>
+                <% if game["email"] and game["email"] != '' %>
+                    <a href="mailto:<%= game["email"] %>"><img src="assets/email.png" width="16" height="16" title="<%= game["email"]%>" alt="<%= game["email"] %>" class="link_icon"/></a>
+                <% end %>
+                <%= game["mg"] %>
             </td>
         </tr>
     <% end %>
