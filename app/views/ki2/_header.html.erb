@@ -1,3 +1,4 @@
+<!-- START OF HEADER -->
 <!-- Логотипчик, заголовок и опциональный регион -->
 <%
     def yearLink(year)
@@ -32,7 +33,7 @@
         <img src="/assets/kogda-igra.png" height=32 width=32>
     </a>
     <span class=logo_text>
-        <a href="/">КогдаИгра</a><% if @region_name %>: <%= @region_name %><% end %>
+        <a href="/">КогдаИгра</a>: <%= @title %>
     </span>
     <form action="/search" method="post" id="search_form" style="clear:left; padding: 2px">
         <input type="search" size="40" maxlength="100" value="" name="search"/><input type="submit" value="Искать" />
@@ -104,10 +105,30 @@
             <% end %>
         <% end %>
     </div>
+    
+    <div class=menu_strip>
+        <div class='active'>
+            <a href="/about/">О нас</a>
+        </div>
+        <div class='active'>
+            <a href="/reviews/">Рецензии</a>
+        </div>
+        <div class='active'>
+            <a href="/photo/">Фото</a>
+        </div>
+        <div class='active'>
+            <a href="http://rpg.ru/newb">Новичку</a>
+        </div>
+    </div>
+    <div class=menu_strip>
+        <div class=active>
+            <form action="/edit/game?id=" method=get style="display:inline">
+                <input type=submit value="Добавить&nbsp;игру...">
+            </form>
+        </div>
+        <div class='passive'>
+            <span class="g-signin2" data-onsuccess="onSignIn" data-height="26" data-theme="dark"></span>
+        </div>
+    </div>
 </div>
-
-
-
-<br>
-Region: <%= @region_key %>, <%= @region_name %><br>
-Year: <%= @year %>
+<!-- END OF HEADER -->

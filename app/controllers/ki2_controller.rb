@@ -42,6 +42,8 @@ class Ki2Controller < ApplicationController
         @year = Time.now.year unless @year
 
         @region_name = @regions[@region_key][:name]
+
+        @title = @region_name + ' ' + @year.to_s
     end
 
 end
