@@ -35,25 +35,25 @@
             <td class="game_name">
                 <!-- URL -->
                 <% if game["uri"] and game["uri"] != '' %>
-                    <a href="<%= game["uri"] %>"><img src="/assets/world_link.png" width="16" height="16" title="<%= game["url"] %>" alt="<%= game["url"] %>" class="link_icon"></a>
+                    <a href="<%= game["uri"] %>"><img src="<%= asset_path "world_link.png" %>" width="16" height="16" title="<%= game["url"] %>" alt="<%= game["url"] %>" class="link_icon"></a>
                 <% end %>
                 
                 <!-- VK -->
                 <% if game["vk_club"] and game["vk_club"] != '' %>
                     <% vk_url = "https://vk.com/" + game["vk_club"] %>
-                    <a href="<%= vk_url %>"><img src="/assets/vk.png" width="16" height="16" title="<%= vk_url %>" alt="<%= vk_url %>" class="link_icon"></a>
+                    <a href="<%= vk_url %>"><img src="<%= asset_path "vk.png" %>" width="16" height="16" title="<%= vk_url %>" alt="<%= vk_url %>" class="link_icon"></a>
                 <% end %>
                 
                 <!-- Livejournal -->
                 <% if game["lj_comm"] and game["lj_comm"] != '' %>
                     <% lj_url = "http://" + game["lj_comm"] + ".livejournal.com" %>
-                    <a href="<%= lj_url %>"><img src="/assets/lj.png" width="16" height="16" title="<%= lj_url %>" alt="<%= lj_url %>" class="link_icon"></a>
+                    <a href="<%= lj_url %>"><img src="<%= asset_path "lj.png" %>" width="16" height="16" title="<%= lj_url %>" alt="<%= lj_url %>" class="link_icon"></a>
                 <% end %>
                 
                 <!-- Facebook -->
                 <% if game["fb_comm"] and game["fb_comm"] != '' %>
                     <% fb_url = "https://facebook.com/groups/" + game["fb_comm"] %>
-                    <a href="<%= fb_url %>"><img src="/assets/fb.png" width="16" height="16" title="<%= fb_url %>" alt="<%= fb_url %>" class="link_icon"></a>
+                    <a href="<%= fb_url %>"><img src="<%= asset_path "fb.png" %>" width="16" height="16" title="<%= fb_url %>" alt="<%= fb_url %>" class="link_icon"></a>
                 <% end %>
 
                 &nbsp;<a href="/game/<%= game["id"] %>"><%= game["name"] %></a>
