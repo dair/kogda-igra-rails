@@ -1,0 +1,31 @@
+<!-- Логотипчик, заголовок и опциональный регион -->
+<div class=logo>
+    <a href="/">
+        <img src="/assets/kogda-igra.png" height=32 width=32>
+    </a>
+    <span class=logo_text>
+        <a href="/">КогдаИгра</a><% if @region_name %>: <%= @region_name %><% end %>
+    </span>
+    <form action="/search" method="post" id="search_form" style="clear:left; padding: 2px">
+        <input type="search" size="40" maxlength="100" value="" name="search"/><input type="submit" value="Искать" />
+    </form>
+</div>
+<div class=menu_box>
+    <% if @regions then %>
+        <div class="menu_strip">
+            <% @regions.each do |key, name| %>
+                <% if key != @region_key then %>
+                    <div class="active">
+                    <%= link_to name, '/' + key %>
+                <% else %>
+                    <div class="passive">
+                    <%= name %>
+                <% end %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+<br>
+Region: <%= @region_key %>, <%= @region_name %><br>
+Year: <%= @year %>
