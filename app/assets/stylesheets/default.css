@@ -194,7 +194,7 @@ ul {padding-left:1em; margin-left:0}
 li ul {padding-left:3em}
 ul>li {list-style-type:none}
 ul>li:before {content:'\2014\a0'; float:left; margin-left:-1.1em}
-* html ul li {behavior: expression( !this.before ? this.before = this.innerHTML = '<nobr style="float:left; margin-left:-1.1em">— </nobr>' + this.innerHTML : '' )}
+* html ul li {behavior: expression( !this.before ? this.before = this.innerHTML = '<nobr style="float:left; margin-left:-1.1em"> </nobr>' + this.innerHTML : '' )}
 
 .control_panel tr td
 {
