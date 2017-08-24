@@ -41,4 +41,21 @@ class Ki2 < ActiveRecord::Base
 
         return ret
     end
+
+    def self.games(region_id, year)
+        rows = connection.select_all("select g.id, g.status, g.name, g.uri, g.vk_club, g.lj_comm, g.fb_comm,
+                sr.sub_region_name, sr.sub_region_disp_name, d.begin as date_start, d.time as date_duration, adddate(d.begin, d.time) as date_finish,
+                s.status_name, s.status_style, s.show_date_flag
+            from ki_games g, ki_sub_regions sr, ki_status s, ki_game_date d
+            where g.status = s.status_id and
+                  g.sub_region_id = sr.sub_region_id and
+                  g.id = d.game_id and
+                  (#{region_id} = 1 or sr.region_id = #{region_id}) and
+                  (year(adddate(d.begin, d.time)) = #{year} or year(d.begin) = #{year})
+                  
+                  order by date_start asc
+                  ")
+            return rows.to_hash
+    end
 end
+
