@@ -86,7 +86,7 @@
             </td>
             <td>
                 <% if game["email"] and game["email"] != '' %>
-                    <a href="mailto:<%= game["email"] %>"><img src="assets/email.png" width="16" height="16" title="<%= game["email"]%>" alt="<%= game["email"] %>" class="link_icon"/></a>
+                    <a href="mailto:<%= game["email"] %>"><img src="<%= asset_path "email.png" %>" width="16" height="16" title="<%= game["email"]%>" alt="<%= game["email"] %>" class="link_icon"/></a>
                 <% end %>
                 <%= game["mg"] %>
             </td>
