@@ -56,7 +56,7 @@ class Ki2 < ActiveRecord::Base
                   g.id = d.game_id and
                   g.type = t.game_type_id and
                   g.polygon = p.polygon_id and
-                  (#{region_id} = 1 or t.show_all_regions = 1 or sr.region_id = #{region_id}) and
+                  (#{region_id} = 1 or sr.region_id = #{region_id}) and
                   (year(adddate(d.begin, d.time)) = #{year} or year(d.begin) = #{year})
                   
                   order by date_start asc

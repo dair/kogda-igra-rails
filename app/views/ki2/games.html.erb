@@ -10,13 +10,14 @@
         <th class="players-column" title="Количество игроков">Иг-ов</th>
         <th class="mg-column">Мастерская группа</th>
     </tr>
+    <% unless @games.empty? %>
     <tr class="month_header">
         <td colspan="8">
-            <br>
             <div id="month-selector">
             </div>
         </td>
     </tr>
+    <% end %>
     <% mon = 0 %>
     <% usedMonths = [] %>
     <% @games.each do |game| %>
@@ -89,21 +90,23 @@
             </td>
         </tr>
     <% end %><!-- @games.each do |game| -->
-    
-    <%
-        monLine = ''
-        usedMonths.each_with_index do |m, index|
-            if index == 0
-                monLine = monthTextNominative(m) + "&nbsp;"
-            else
-                monLine = monLine + "<a href=\"#m" + m.to_s + "\">" +  monthTextNominative(m)  + '</a>&nbsp;'
+
+    <% unless @games.empty? %>
+        <%
+            monLine = ''
+            usedMonths.each_with_index do |m, index|
+                if index == 0
+                    monLine = monthTextNominative(m) + "&nbsp;"
+                else
+                    monLine = monLine + "<a href=\"#m" + m.to_s + "\">" +  monthTextNominative(m)  + '</a>&nbsp;'
+                end
+                
+                #monthTextNominative(m) + "&nbsp;"
             end
-            
-            #monthTextNominative(m) + "&nbsp;"
-        end
-    %>
-    <script>
-        document.getElementById("month-selector").innerHTML = '<%= raw(monLine) %>';
-    </script>
+        %>
+        <script>
+            document.getElementById("month-selector").innerHTML = '<%= raw(monLine) %>';
+        </script>
+    <% end %>
 </table>
 
