@@ -50,7 +50,8 @@ class Ki2 < ActiveRecord::Base
                 t.game_type_name, t.show_all_regions,
                 p.polygon_name
             from ki_games g, ki_sub_regions sr, ki_status s, ki_game_date d, ki_game_types t, ki_polygons p
-            where g.status = s.status_id and
+            where g.deleted_flag = 0 and
+                  g.status = s.status_id and
                   g.sub_region_id = sr.sub_region_id and
                   g.id = d.game_id and
                   g.type = t.game_type_id and
