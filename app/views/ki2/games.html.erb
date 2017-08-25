@@ -36,8 +36,15 @@
             <% usedMonths.push(mon) %>
         <% end %>
         <tr>
-            <td class="<%= game["status_style"] %>" id="<%= game["id"] %>">
-                <%= game["status_name"] %>
+            <!-- status -->
+            <% status_style = game["status_style"] %>
+            <% status_name = game["status_name"] %>
+            <% if game["order"] > 0 
+                status_style="status-unknown"
+                status_name = "Перенесена!"
+               end %>
+            <td class="<%= status_style %>" id="<%= game["id"] %>">
+                <%= status_name %>
             </td>
             <td class="game_name">
                 <!-- URL -->

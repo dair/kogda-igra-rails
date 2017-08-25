@@ -45,7 +45,7 @@ class Ki2 < ActiveRecord::Base
     def self.games(region_id, year)
         rows = connection.select_all("select g.id, g.status, g.name, g.uri, g.vk_club, g.lj_comm, g.fb_comm, g.players_count, g.mg, g.email,
                 sr.sub_region_name, sr.sub_region_disp_name,
-                d.begin as date_start, d.time as date_duration, adddate(d.begin, d.time) as date_finish,
+                d.order, d.begin as date_start, d.time as date_duration, adddate(d.begin, d.time) as date_finish,
                 s.status_name, s.status_style, s.show_date_flag,
                 t.game_type_name, t.show_all_regions,
                 p.polygon_name
