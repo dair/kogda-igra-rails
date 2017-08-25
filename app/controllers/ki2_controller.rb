@@ -2,8 +2,40 @@ class Ki2Controller < ApplicationController
     protect_from_forgery
 
     helper_method :dateRangeToText
+    helper_method :monthTextNominative
 
-    def monthText(mon)
+    def monthTextNominative(mon)
+        ret = '???'
+        if mon == 1
+            ret = "январь"
+        elsif mon == 2
+            ret = "февраль"
+        elsif mon == 3
+            ret = "март"
+        elsif mon == 4
+            ret = "апрель"
+        elsif mon == 5
+            ret = "май"
+        elsif mon == 6
+            ret = "июнь"
+        elsif mon == 7
+            ret = "июль"
+        elsif mon == 8
+            ret = "август"
+        elsif mon == 9
+            ret = "сентябрь"
+        elsif mon == 10
+            ret = "октябрь"
+        elsif mon == 11
+            ret = "ноябрь"
+        elsif mon == 12
+            ret = "декабрь"
+        end
+
+        return ret.capitalize
+    end
+
+    def monthTextGenitive(mon)
         if mon == 1
             return "января"
         elsif mon == 2
@@ -41,13 +73,13 @@ class Ki2Controller < ApplicationController
         yf = finish.year
 
         if ys != yf
-            return ds.to_s + " " + monthText(ms) + " " + ys.to_s + "–" + df.to_s + " " + monthText(mf) + " " + yf.to_s
+            return ds.to_s + " " + monthTextGenitive(ms) + " " + ys.to_s + "–" + df.to_s + " " + monthTextGenitive(mf) + " " + yf.to_s
         elsif ms != mf
-            return ds.to_s + " " + monthText(ms)  + "–" + df.to_s + " " + monthText(mf)
+            return ds.to_s + " " + monthTextGenitive(ms)  + "–" + df.to_s + " " + monthTextGenitive(mf)
         elsif ds != df
-            return ds.to_s + "–" + df.to_s + " " + monthText(mf)
+            return ds.to_s + "–" + df.to_s + " " + monthTextGenitive(mf)
         else
-            return df.to_s + " " + monthText(mf)
+            return df.to_s + " " + monthTextGenitive(mf)
         end
     end
 

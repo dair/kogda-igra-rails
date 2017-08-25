@@ -13,29 +13,26 @@
     <tr class="month_header">
         <td colspan="8">
             <br>
-            <b>Январь</b>
-            <a href="#feb">Февраль</a>
-            <a href="#mar">Март</a>
-            <a href="#apr">Апрель</a>
-            <a href="#may">Май</a>
-            <a href="#jun">Июнь</a>
-            <a href="#jul">Июль</a>
-            <a href="#aug">Август</a>
-            <a href="#sep">Сентябрь</a>
-            <a href="#oct">Октябрь</a>
-            <a href="#nov">Ноябрь</a>
-            <a href="#dec">Декабрь</a>
+            <div id="month-selector">
+            </div>
         </td>
     </tr>
-    <% mon = 1 %>
+    <% mon = 0 %>
+    <% usedMonths = [] %>
     <% @games.each do |game| %>
         <% if game["date_start"].month > mon %>
-            <tr>
-                <td colspan="8">
-                    Weee
-                </td>
-            </tr>
-            <% mon = game["date_start"].month %>
+            <% if mon > 0 %>
+                <% mon = game["date_start"].month %>
+                <tr>
+                    <td colspan="8">
+                        <br>
+                        <b id="<%= "m" + mon.to_s  %>"><%= monthTextNominative(mon)  %></b>
+                    </td>
+                </tr>
+            <% else %>
+                <% mon = game["date_start"].month %>
+            <% end %>
+            <% usedMonths.push(mon) %>
         <% end %>
         <tr>
             <td class="<%= game["status_style"] %>" id="<%= game["id"] %>">
@@ -91,5 +88,22 @@
                 <%= game["mg"] %>
             </td>
         </tr>
-    <% end %>
+    <% end %><!-- @games.each do |game| -->
+    
+    <%
+        monLine = ''
+        usedMonths.each_with_index do |m, index|
+            if index == 0
+                monLine = monthTextNominative(m) + "&nbsp;"
+            else
+                monLine = monLine + "<a href=\"#m" + m.to_s + "\">" +  monthTextNominative(m)  + '</a>&nbsp;'
+            end
+            
+            #monthTextNominative(m) + "&nbsp;"
+        end
+    %>
+    <script>
+        document.getElementById("month-selector").innerHTML = '<%= raw(monLine) %>';
+    </script>
 </table>
+
