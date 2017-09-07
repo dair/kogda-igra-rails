@@ -18,12 +18,6 @@ class Ki2 < ActiveRecord::Base
 
         ret[1] = []
         rows.to_hash.each do |row|
-            #unless ret.key?(row["year"])
-            #    ret[row["year"]] = []
-            #end
-            #ret[row["year"]].push(row["region_id"])
-
-
             unless ret.key?(row["region_id"])
                 ret[row["region_id"]] = []
             end
@@ -31,13 +25,10 @@ class Ki2 < ActiveRecord::Base
             ret[1].push(row["year"])
         end
 
-        puts ret
-
         ret.each do |key, value|
             value.sort!
             value.uniq!
         end
-        puts ret
 
         return ret
     end
